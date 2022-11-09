@@ -1,5 +1,5 @@
 'use strict';
-console.log('callback.js');
+console.log('asyncAwait.js');
 
 function getPost1() {
     return new Promise((resolve, reject) => {
@@ -26,17 +26,16 @@ function getPost3() {
             resolve(3)
           }, 1800);
     })
-  
 }
 
-// getPost1(getPost2);
-// getPost2();
-// getPost3();
-// getPost1()
-//     .then(() => getPost2())
-//     .then(() => getPost3())
-//     .catch((err) => console.warn('Error somewhere in getPost()', err))
-
-Promise.all([getPost1(), getPost2(), getPost3()]).then((values) => {
-    console.log(values)
-}).catch(console.warn('Error somewhere in getPost()'))
+async function app() {
+    try {
+        await getPost1();
+        await getPost2()
+        getPost3()
+    } catch(error) {
+        console.log(error, 'pagavau klaida')
+    }
+    
+}
+app()
